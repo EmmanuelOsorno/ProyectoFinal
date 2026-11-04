@@ -63,12 +63,11 @@ public class Sala {
 
     @Override
     public String toString() {
-        return "Sala{" +
-                "código='" + código + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", capacidad=" + capacidad +
-                ", estadoSala=" + estadoSala +
-                ", ListaAsientos=" + ListaAsientos +
-                '}';
+        return "Sala "+ nombre+
+                "\nCódigo: " + código +
+                "\nCapacidad: " + capacidad +
+                "\nEstado de la sala: " + estadoSala +
+                //solo mostrar la cantidad de asientos
+                "\nCantidad de asientos: " + ListaAsientos.size()+"\n";
     }
 }
