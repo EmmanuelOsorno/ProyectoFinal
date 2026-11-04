@@ -30,6 +30,7 @@ public class Aplicacion {
                         System.out.println("=====Registrar Pelicula=====");
                         System.out.println("Codigo de la pelicula: ");
                         String codigoP=scanner.nextLine();
+                        scanner.nextLine();
                         System.out.println("Nombre de la pelicula: ");
                         String nombreP=scanner.nextLine();
                         System.out.println("Genero de la pelicula: ");
