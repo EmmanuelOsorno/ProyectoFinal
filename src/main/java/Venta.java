@@ -11,9 +11,10 @@ public class Venta {
     private LocalDateTime fechaHora;
     private double valorPagado;
     private EstadoVenta estadoVenta;
+    private TipoCliente tipoCliente;
 
     //constructor
-    public Venta(String código, Cliente cliente, Funcion funcion, Asiento asiento, LocalDateTime fechaHora, double valorPagado, EstadoVenta estadoVenta) {
+    public Venta(String código, Cliente cliente, Funcion funcion, Asiento asiento, LocalDateTime fechaHora, double valorPagado, EstadoVenta estadoVenta, TipoCliente tipoCliente) {
         this.código = código;
         this.cliente = cliente;
         this.funcion = funcion;
@@ -22,6 +23,7 @@ public class Venta {
         this.fechaHora = LocalDateTime.now();
         this.valorPagado = valorPagado;
         this.estadoVenta = estadoVenta;
+        this.tipoCliente=tipoCliente;
     }
 
     //get y set
@@ -79,5 +81,29 @@ public class Venta {
 
     public void setEstadoVenta(EstadoVenta estadoVenta) {
         this.estadoVenta = estadoVenta;
+    }
+
+    public TipoCliente getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(TipoCliente tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
+
+    //get y set
+
+    @Override
+    public String toString() {
+        return "Venta{" +
+                "código='" + código + '\'' +
+                ", cliente=" + cliente +
+                ", funcion=" + funcion +
+                ", asiento=" + asiento +
+                ", fechaHora=" + fechaHora +
+                ", valorPagado=" + valorPagado +
+                ", estadoVenta=" + estadoVenta +
+                ", tipoCliente=" + tipoCliente +
+                '}';
     }
 }
