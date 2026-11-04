@@ -65,6 +65,7 @@ public class Aplicacion {
                         Pelicula pelicula=new Pelicula(codigoP,nombreP,generoP,duracionP,clasificacion,estadoPelicula);
 
                     case 2:
+
                 }
             }while (opcion!=0);
             scanner.close();
