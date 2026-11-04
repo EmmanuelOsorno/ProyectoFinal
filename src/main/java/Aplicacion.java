@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Aplicacion {
-
 
         //menu (provicional)
         public static void main(String[] args) {
@@ -20,7 +18,13 @@ public class Aplicacion {
                 System.out.println("2. Consultar Peliculas");
                 System.out.println("3. Actualizar Pelicula");
                 System.out.println("4. Desabilitar Pelicula");
-
+                System.out.println("-----SALA-----");
+                System.out.println("5. Registrar Sala");
+                System.out.println("6. Consultar Salas");
+                System.out.println("7. Mostrar asientos de la sala");
+                System.out.println("8. Actualizar Sala");
+                System.out.println("9. Desabilitar Sala");
+                System.out.println("-----x-----");
                 System.out.println(". Registrar Sala");
                 System.out.println(". Ver Películas registradas");
                 System.out.println("0. Salir");
@@ -141,6 +145,90 @@ public class Aplicacion {
                         break;
 
                     case 5:
+                        System.out.println("=====Registrar Sala=====");
+                        //limpiar buffer del menu
+                        scanner.nextLine();
+                        System.out.println("Codigo de la sala: ");
+                        String codigoS=scanner.nextLine();
+                        System.out.println("Nombre de la sala: ");
+                        String nombreS=scanner.nextLine();
+                        System.out.println("Capacidad de personas de la sala: ");
+                        int capacidadS=scanner.nextInt();
+                        System.out.println("1. Disponible\n2. Fuera de servicio\nEstado de la sala: ");
+                        int estadoS=scanner.nextInt();
+                        //la iniciamos como disponible
+                        EstadoSala estadoSala =EstadoSala.DISPONIBLE;
+                        switch (estadoS){
+                            case 1:estadoSala=EstadoSala.DISPONIBLE;
+                                break;
+                            case 2:estadoSala=EstadoSala.FUERA_DE_SERVICIO;
+                                break;
+                        }
+                        //los asientos se crean automaticamente al registrar la sala
+
+                        cine.registrarSala(codigoS,nombreS,capacidadS,estadoSala);
+                        System.out.println("Sala registrada crrectamente");
+                        break;
+
+                    case 6:
+                        System.out.println("=====Salas=====");
+                        for(Sala ListaSalas: cine.getListaSalas()){
+                            System.out.println(ListaSalas);
+                        }
+                        break;
+
+                    case 7:
+                        System.out.println("=====Asientos de Sala=====");
+                        //limpiar buffer del menu
+                        scanner.nextLine();
+                        System.out.println("Codigo de la sala: ");
+                        String codigoParaAsientos=scanner.nextLine();
+
+                        cine.mostrarAsientos(codigoParaAsientos);
+                        break;
+
+                    case 8:
+                        System.out.println("=====Actualizar Sala=====");
+                        //limpiar buffer
+                        scanner.nextLine();
+                        System.out.println("Codigo de la sala a actualizar: ");
+                        String codigoActualizarS=scanner.nextLine();
+
+                        System.out.println("Nuevo nombre: ");
+                        String nombreSalaA=scanner.nextLine();
+                        System.out.println("Nueva capacidad: ");
+                        int capacidadSalaA=scanner.nextInt();
+                        System.out.println("\1. Disponible\n2. Fuera de servicio\nNuevo estado de la sala: ");
+                        int estadoSalaA=scanner.nextInt();
+                        EstadoSala estadoSalaActualizar=EstadoSala.DISPONIBLE;
+                        switch (estadoSalaA){
+                            case 1:estadoSalaActualizar=EstadoSala.DISPONIBLE;
+                            break;
+                            case 2:estadoSalaActualizar=EstadoSala.FUERA_DE_SERVICIO;
+                            break;
+                        }
+
+                        Sala salaActualizada=new Sala(codigoActualizarS,nombreSalaA,capacidadSalaA,estadoSalaActualizar);
+                        if(cine.actualizarSala(codigoActualizarS,salaActualizada)){
+                            System.out.println("Sala actualizada correctamente");
+                        }else{
+                            System.out.println("Sala no encontrada");
+                        }
+                        break;
+
+                    case 9:
+                        System.out.println("=====Desabilitar Sala=====");
+                        //limpiar buffer
+                        scanner.nextLine();
+                        System.out.println("Codigo de la sala a desabilitar: ");
+                        String codigoSalaDesabilitar=scanner.nextLine();
+
+                        if(cine.desabilitarSala(codigoSalaDesabilitar)){
+                            System.out.println("Sala desabilitada correctamente");
+                        }else{
+                            System.out.println("Sala no enontrada");
+                        }
+                        break;
 
 
                 }
