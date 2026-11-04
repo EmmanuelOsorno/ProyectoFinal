@@ -55,7 +55,7 @@ public class Aplicacion {
                         System.out.println("1. Disponible\n2. No disponible\nEstado de la pelicula: ");
                         int estadoP=scanner.nextInt();
                         //la iniciamos como disponible
-                        EstadoPelicula estadoPelicula=EstadoPelicula.DISPONIBLE
+                        EstadoPelicula estadoPelicula=EstadoPelicula.DISPONIBLE;
                         switch (estadoP){
                             case 1:estadoPelicula=EstadoPelicula.DISPONIBLE;
                             break;
@@ -63,12 +63,8 @@ public class Aplicacion {
                             break;
                         }
                         Pelicula pelicula=new Pelicula(codigoP,nombreP,generoP,duracionP,clasificacion,estadoPelicula);
-                        ListaPeliculas.add(pelicula);
-                        System.out.println("La pelicula se registro correctamente");
 
                     case 2:
-                        
-
                 }
             }while (opcion!=0);
             scanner.close();
