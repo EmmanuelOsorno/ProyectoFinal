@@ -25,7 +25,6 @@ public class Aplicacion {
                 System.out.println("8. Actualizar Sala");
                 System.out.println("9. Desabilitar Sala");
                 System.out.println("-----x-----");
-                System.out.println(". Registrar Sala");
                 System.out.println(". Ver Películas registradas");
                 System.out.println("0. Salir");
                 System.out.print("Elija una opción: ");
