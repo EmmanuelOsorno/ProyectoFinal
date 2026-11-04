@@ -5,15 +5,17 @@ public class Aplicacion {
 
 
         //menu (provicional)
-        static  void main() {
+        public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
+
+            Cine cine=new Cine("CinemaUQ");
             int opcion;
 
             do {
                 System.out.println("=====CINEMAUQ=====");
                 System.out.println();
 
-                System.out.println("===PELICULA===");
+                System.out.println("-----PELICULA-----");
                 System.out.println("1. Registrar Película");
                 System.out.println("2. Consultar Peliculas");
                 System.out.println("3. Actualizar Pelicula");
@@ -28,16 +30,16 @@ public class Aplicacion {
                 switch (opcion){
                     case 1:
                         System.out.println("=====Registrar Pelicula=====");
-                        System.out.println();
+                        //limpiar buffer del menu
+                        scanner.nextLine();
                         System.out.println("Codigo de la pelicula: ");
                         String codigoP=scanner.nextLine();
-                        scanner.nextLine();
                         System.out.println("Nombre de la pelicula: ");
                         String nombreP=scanner.nextLine();
                         System.out.println("Genero de la pelicula: ");
                         String generoP=scanner.nextLine();
                         System.out.println("Duracion de la pelicula (minutos): ");
-                        int duracionP=scanner.nextInt();
+                        double duracionP=scanner.nextDouble();
                         System.out.println("1. Todos\n2. Mayores de 7 años\n3. Mayores de 12 años\n4. Mayores de 15 años\n5. Mayores de 18 años\nClasificacio de la pelicula: ");
                         int clasificacionP=scanner.nextInt();
                         //la iniciamos como para todos
@@ -64,13 +66,12 @@ public class Aplicacion {
                             case 2:estadoPelicula=EstadoPelicula.NO_DISPONIBLE;
                             break;
                         }
-                        Pelicula pelicula=new Pelicula(codigoP,nombreP,generoP,duracionP,clasificacion,estadoPelicula);
+                        cine.registrarPelicula(codigoP,nombreP,generoP,duracionP,clasificacion,estadoPelicula);
                         System.out.println("Pelicula registrada correctamente");
                         break;
 
                     case 2:
                         System.out.println("=====Peliculas=====");
-                        System.out.println();
                         for(Pelicula ListaPeliculas: cine.getListaPeliculas()){
                             System.out.println(ListaPeliculas);
                         }
@@ -78,7 +79,8 @@ public class Aplicacion {
 
                     case 3:
                         System.out.println("=====Actualizar Pelicula=====");
-                        System.out.println();
+                        //limpiar buffer
+                        scanner.nextLine();
                         System.out.println("Codigo de la pelicula a actualizar: ");
                         String codigoActualizar=scanner.nextLine();
 
@@ -125,6 +127,9 @@ public class Aplicacion {
                         break;
 
                     case 4:
+                        System.out.println("=====Desabilitar Pelicula=====");
+                        //limpiar buffer
+                        scanner.nextLine();
                         System.out.println("Codigo de la pelicula a desabilitar: ");
                         String codigoDesabilitar=scanner.nextLine();
 
