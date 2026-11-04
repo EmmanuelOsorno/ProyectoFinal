@@ -2,6 +2,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Cine {
+    //atributo
+    private String nombre;
 
     //listas para los componentes
     private ArrayList<Pelicula> ListaPeliculas;
@@ -11,7 +13,9 @@ public class Cine {
     private ArrayList<Venta> ListaVentas;
 
     //constructor
-    public Cine() {
+    public Cine(String nombre) {
+        this.nombre=nombre;
+
         this.ListaPeliculas = new ArrayList<>();
         this.ListaSalas = new ArrayList<>();
         this.ListaClientes = new ArrayList<>();
@@ -20,6 +24,15 @@ public class Cine {
     }
 
     //get y set
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public ArrayList<Pelicula> getListaPeliculas() {
         return ListaPeliculas;
     }
@@ -64,7 +77,7 @@ public class Cine {
     //==================METODOS=======================
 
     //METODOS PELICULA
-    public void registrarPelicula(String codigo, String nombre, String genero, int duracion, Clasificacion clasificacion, EstadoPelicula estadoPelicula) {
+    public void registrarPelicula(String codigo, String nombre, String genero, double duracion, Clasificacion clasificacion, EstadoPelicula estadoPelicula) {
         Pelicula nuevaPelicula = new Pelicula(codigo, nombre, genero, duracion, clasificacion, estadoPelicula);
         ListaPeliculas.add(nuevaPelicula);
     }
@@ -186,6 +199,8 @@ public class Cine {
         }
         if (funcionEncontrada == null) {
             System.out.println("No existe esta funcion");
+            //se retorna un false en caso que no exista la funcion, para detener el proceso
+            return false;
         }
 
         //sala
@@ -193,6 +208,8 @@ public class Cine {
         //si no hay sala
         if (sala == null) {
             System.out.println("No existe una sala para esta funcion");
+            //se retorna un false en caso que no exista la sala, para detener el proceso
+            return false;
         }
 
         //verificar asientos
@@ -209,15 +226,21 @@ public class Cine {
         //si no hay asientos en estado DISPONIBLE
         if (!disponibles) {
             System.out.println("No hay asientos disponibles");
+            //se retorna un false en caso de que no haya disponibles, para detener el proceso
+            return false;
         }
 
         //verifica existencia de asiento
         if (asientoSeleccionado == null) {
             System.out.println("No existe este asiento");
+            //se retorna un false en caso que no exista el asiento, para detener el proceso
+            return false;
         }
 
         if (asientoSeleccionado.getEstadoAsiento() != EstadoAsiento.DISPONIBLE) {
             System.out.println("El asiento esta ocupado");
+            //se retorna un false en caso que el asiento no este en estado DISPONIBLE, para detener el proceso
+            return false;
         }
 
         //valor de la entrada
@@ -229,17 +252,14 @@ public class Cine {
         //registrar fecha y hora de la venta
         LocalDateTime fechaHoraVenta = LocalDateTime.now();
 
-        //estado de la venta
-
         //registrar la entrada vendida
+        //se crea con estado ACTIVA
         Venta nuevaVenta = new Venta(codigoEntrada, cliente, funcionEncontrada, asientoSeleccionado, fechaHoraVenta, valorFinal,EstadoVenta.ACTIVA, cliente.getTipoCliente());
+        ListaVentas.add(nuevaVenta);
 
         System.out.println("Venta de la compra registrada correctamente");
         return true;
     }
-
-
-
 
 
 }
