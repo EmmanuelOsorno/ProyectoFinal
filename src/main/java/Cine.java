@@ -174,6 +174,7 @@ public class Cine {
     }
 
     //REGISTRAR VENTA DE ENTRADA
+    //codigoEntrada=codigoVenta
     public boolean registrarVentaEntrada(String codigoEntrada, String codigoFuncion, String codigoAsiento, Cliente cliente) {
         //verificar funcion
         Funcion funcionEncontrada = null;
@@ -220,7 +221,7 @@ public class Cine {
         }
 
         //valor de la entrada
-        double valorFinal = cliente.getTipoCliente().getValor();
+        double valorFinal = (cliente.getTipoCliente().getValor())+funcionEncontrada.getValorBase();
 
         //cambiar esado del asiento a OCUPADO
         asientoSeleccionado.setEstadoAsiento(EstadoAsiento.OCUPADO);
@@ -228,8 +229,10 @@ public class Cine {
         //registrar fecha y hora de la venta
         LocalDateTime fechaHoraVenta = LocalDateTime.now();
 
+        //estado de la venta
+
         //registrar la entrada vendida
-        Entrada nuevaEntrada = new Entrada(codigoEntrada, funcionEncontrada, cliente, asientoSeleccionado, fechaHoraVenta, valorFinal, cliente.getTipoCliente());
+        Venta nuevaVenta = new Venta(codigoEntrada, cliente, funcionEncontrada, asientoSeleccionado, fechaHoraVenta, valorFinal,EstadoVenta.ACTIVA, cliente.getTipoCliente());
 
         System.out.println("Venta de la compra registrada correctamente");
         return true;
