@@ -129,10 +129,10 @@ public class Cine {
 
         //generar los asientos al registrar la sala
         //poner una cantidad predeterminada de asientos en la fila
-        int asientosFila = 20;
+        int asientosFila = 10;
         int cantidadFilas = (int) Math.ceil((double) capacidad / asientosFila);
         int contadorAsientos = 0;
-        for (int a = 0; a <= cantidadFilas; a++) {
+        for (int a = 0; a < cantidadFilas; a++) {
             char letra = (char) ('A' + a);
             String fila = String.valueOf(letra);
 
@@ -158,6 +158,38 @@ public class Cine {
         }
     }
 
+    //mostrar los asientos de la sala
+    public void mostrarAsientos(String  codigo){
+        Sala asientosSala=null;
+
+        //buscar la sala
+        for(Sala sala:ListaSalas){
+            if(sala.getCódigo().equalsIgnoreCase(codigo)){
+                asientosSala=sala;
+                break;
+            }
+        }
+        //si la sala no existe
+        if(asientosSala==null){
+            System.out.println("Esta sala no existe");
+            return;
+        }
+        System.out.println("Asientos: "+asientosSala.getNombre());
+        String fila="";
+
+        for(Asiento asiento:asientosSala.getListaAsientos()){
+            //para ordenar como salen los asientos
+            if(!asiento.getFila().equals(fila)){
+                if(!fila.isEmpty()){
+                    System.out.println();
+                }
+                fila=asiento.getFila();
+                System.out.println("Fila "+fila+":");
+            }
+            System.out.println(asiento.getCódigo()+":"+asiento.getEstadoAsiento());
+        }
+    }
+
     public boolean actualizarSala(String codigo, Sala infoActualizada) {
         boolean actualizada = false;
         for (Sala sala : ListaSalas) {
@@ -165,12 +197,28 @@ public class Cine {
                 sala.setNombre(infoActualizada.getNombre());
                 sala.setCapacidad(infoActualizada.getCapacidad());
                 sala.setEstadoSala(infoActualizada.getEstadoSala());
-                sala.setListaAsientos(infoActualizada.getListaAsientos());
-                actualizada = true;
-                break;
+                //eliminar los asientos antiguos
+                sala.getListaAsientos().clear();
+                //actualizar los asientos
+                //usamos el mismo metodo que esta en registrarSala
+                int asientosFila = 10;
+                int cantidadFilas = (int) Math.ceil((double) infoActualizada.getCapacidad() / asientosFila);
+                int contadorAsientos = 0;
+                for (int a = 0; a < cantidadFilas; a++) {
+                    char letra = (char) ('A' + a);
+                    String fila = String.valueOf(letra);
+
+                    for (int numero = 1; numero <= asientosFila && contadorAsientos < infoActualizada.getCapacidad(); numero++) {
+                        String codigoAsiento = fila + numero;
+                        Asiento nuevoAsiento = new Asiento(codigoAsiento, fila, numero, EstadoAsiento.DISPONIBLE);
+                        sala.getListaAsientos().add(nuevoAsiento);
+                        contadorAsientos++;
+                    }
+                }
+                return true;
             }
         }
-        return actualizada;
+        return false;
     }
 
     //desabilitar sala, es decir, cambiar su estado a FUERA_DE_SERVICIO
