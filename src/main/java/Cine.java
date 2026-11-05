@@ -25,7 +25,6 @@ public class Cine {
     }
 
     //get y set
-
     public String getNombre() {
         return nombre;
     }
@@ -83,18 +82,6 @@ public class Cine {
         ListaPeliculas.add(nuevaPelicula);
     }
 
-    public void consultarPeliculas() {
-        //si no hay peliculas
-        if (ListaPeliculas.size() == 0) {
-            System.out.println("No hay peliculas registradas");
-            return;
-        }
-        for (int a = 0; a < ListaPeliculas.size(); a++) {
-            Pelicula pelicula = ListaPeliculas.get(a);
-            System.out.println(pelicula.toString());
-        }
-    }
-
     public boolean actualizarPelicula(String codigo, Pelicula infoActualizada) {
         boolean actualizado = false;
         for (Pelicula pelicula : ListaPeliculas) {
@@ -145,18 +132,6 @@ public class Cine {
             }
         }
         ListaSalas.add(nuevaSala);
-    }
-
-    public void consultarSalas() {
-        //si no hay salas
-        if (ListaSalas.size() == 0) {
-            System.out.println("No hay salas registradas");
-            return;
-        }
-        for (int a = 0; a < ListaSalas.size(); a++) {
-            Sala sala = ListaSalas.get(a);
-            System.out.println(sala.toString());
-        }
     }
 
     //mostrar los asientos de la sala
@@ -286,10 +261,9 @@ public class Cine {
     }
 
     //METODOS VENTA
-    //venta es igual a entrada, porque una venta es la adquisicion de una entrada
 
     //registrar venta
-    public boolean registrarVentaEntrada(String codigoVenta, String codigoFuncion, String codigoAsiento, Cliente cliente) {
+    public boolean registrarVenta(String codigoVenta, String codigoFuncion, String codigoAsiento, Cliente cliente) {
         //verificar funcion
         Funcion funcion_venta = buscarFuncion(codigoFuncion);
         if(funcion_venta==null){
