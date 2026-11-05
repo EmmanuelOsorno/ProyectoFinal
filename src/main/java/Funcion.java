@@ -83,12 +83,12 @@ public class Funcion {
     @Override
     public String toString() {
         return "Funcion "+código+
-                "\nFfecha: " + fecha +
+                "\nFecha: " + fecha +
                 "\nHora: " + hora +
                 "\nValor base: " + valorBase +
                 "\nEstado de la funcion: " + estadoFuncion+
-                "\n\nInfo Pelicula: " +pelicula+
-                "\n\nInfo Sala: " + sala;
+                "\n\n---Info Pelicula---\n" +pelicula+
+                "\n---Info Sala---\n" + sala+"\n";
 
     }
 }
