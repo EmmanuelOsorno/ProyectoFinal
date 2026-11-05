@@ -397,4 +397,16 @@ public class Cine {
         return true;
     }
 
+    //metodo para calcular la cantidad de ventas
+    //solo se cuentan las ventas activas / realizadas
+    public int calcularTotalVentas(){
+        int cantidadVentas=0;
+        for(Venta venta:ListaVentas){
+            if(venta.getEstadoVenta()==EstadoVenta.ACTIVA){
+                cantidadVentas++;
+            }
+        }
+        return cantidadVentas;
+    }
+
 }
