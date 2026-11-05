@@ -45,4 +45,14 @@ public class Asiento {
     public void setEstadoAsiento(EstadoAsiento estadoAsiento) {
         this.estadoAsiento = estadoAsiento;
     }
+
+    //toString
+
+    @Override
+    public String toString() {
+        return "Asiento " + código +
+                "\nFila: " + fila +
+                "\nNúmero: " + número +
+                "\nEstado del asiento: " + estadoAsiento+"\n";
+    }
 }

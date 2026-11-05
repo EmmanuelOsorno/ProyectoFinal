@@ -35,4 +35,12 @@ public class Cliente {
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
+
+    //toString
+    //no muestra el tipo de cliente porque cuando mostramos las ventas, el tipo de cliente aparece entre la informacion
+    @Override
+    public String toString() {
+        return "Cliente " + nombre +
+                "\nNo. de identificacion: " + identificacion+"\n";
+    }
 }
