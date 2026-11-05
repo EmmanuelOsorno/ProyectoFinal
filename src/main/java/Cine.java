@@ -274,27 +274,32 @@ public class Cine {
         return true;
     }
 
-
-
-    //REGISTRAR VENTA DE ENTRADA
-    //codigoEntrada=codigoVenta
-    public boolean registrarVentaEntrada(String codigoEntrada, String codigoFuncion, String codigoAsiento, Cliente cliente) {
-        //verificar funcion
-        Funcion funcionEncontrada = null;
-        for (Funcion funcion : ListaFunciones) {
-            if (funcion.getCódigo().equalsIgnoreCase(codigoFuncion)) {
-                funcionEncontrada = funcion;
-                break;
+    //metodo para encontrar una funcion por su codigo
+    public Funcion buscarFuncion (String codigo){
+        for(Funcion funcion:ListaFunciones){
+            if(funcion.getCódigo().equalsIgnoreCase(codigo)){
+                return funcion;
             }
         }
-        if (funcionEncontrada == null) {
+        //retorna null si la funcion no existe
+        return null;
+    }
+
+    //METODOS VENTA
+    //venta es igual a entrada, porque una venta es la adquisicion de una entrada
+
+    //registrar venta
+    public boolean registrarVentaEntrada(String codigoVenta, String codigoFuncion, String codigoAsiento, Cliente cliente) {
+        //verificar funcion
+        Funcion funcion_venta = buscarFuncion(codigoFuncion);
+        if(funcion_venta==null){
             System.out.println("No existe esta funcion");
             //se retorna un false en caso que no exista la funcion, para detener el proceso
             return false;
         }
 
         //sala
-        Sala sala = funcionEncontrada.getSala();
+        Sala sala = funcion_venta.getSala();
         //si no hay sala
         if (sala == null) {
             System.out.println("No existe una sala para esta funcion");
@@ -302,16 +307,17 @@ public class Cine {
             return false;
         }
 
-        //verificar asientos
+        //verificar si hay asientos disponibles en la sala
         boolean disponibles = false;
         Asiento asientoSeleccionado = null;
         for (Asiento asiento : sala.getListaAsientos()) {
-            if (asiento.getEstadoAsiento() == EstadoAsiento.DISPONIBLE) {
-                disponibles = true;
-            }
             if (asiento.getCódigo().equalsIgnoreCase(codigoAsiento)) {
                 asientoSeleccionado = asiento;
             }
+            if (asiento.getEstadoAsiento() == EstadoAsiento.DISPONIBLE) {
+                disponibles = true;
+            }
+
         }
         //si no hay asientos en estado DISPONIBLE
         if (!disponibles) {
@@ -327,29 +333,40 @@ public class Cine {
             return false;
         }
 
+        //si el asiento no esta en estado DISPONIBLE
         if (asientoSeleccionado.getEstadoAsiento() != EstadoAsiento.DISPONIBLE) {
             System.out.println("El asiento esta ocupado");
             //se retorna un false en caso que el asiento no este en estado DISPONIBLE, para detener el proceso
             return false;
         }
 
-        //valor de la entrada
-        double valorFinal = (cliente.getTipoCliente().getValor())+funcionEncontrada.getValorBase();
+        //valor de la entrada (valor segun el tipo de cliente + valor base de la funcion)
+        double valorFinal = (cliente.getTipoCliente().getValor())+funcion_venta.getValorBase();
 
-        //cambiar esado del asiento a OCUPADO
+        //cambiar estado del asiento a OCUPADO
+        //el nuevo estado esta entre "()" porque el set... es un metodo
         asientoSeleccionado.setEstadoAsiento(EstadoAsiento.OCUPADO);
 
         //registrar fecha y hora de la venta
+        //LocalDateTime.now para que la fecha y hora se guarden al momento de registrar la venta
         LocalDateTime fechaHoraVenta = LocalDateTime.now();
 
         //registrar la entrada vendida
         //se crea con estado ACTIVA
-        Venta nuevaVenta = new Venta(codigoEntrada, cliente, funcionEncontrada, asientoSeleccionado, fechaHoraVenta, valorFinal,EstadoVenta.ACTIVA, cliente.getTipoCliente());
+        Venta nuevaVenta = new Venta(codigoVenta, cliente, funcion_venta, asientoSeleccionado, valorFinal,EstadoVenta.ACTIVA, cliente.getTipoCliente());
         ListaVentas.add(nuevaVenta);
-
-        System.out.println("Venta de la compra registrada correctamente");
         return true;
     }
 
+    //metodo para encontrar un cliente segun su identificacion
+    public Cliente buscarCliente(String identificacion){
+        for(Cliente cliente:ListaClientes){
+            if(cliente.getIdentificacion().equalsIgnoreCase(identificacion)){
+                return cliente;
+            }
+        }
+        //retorna null si no existe el cliente
+        return null;
+    }
 
 }
