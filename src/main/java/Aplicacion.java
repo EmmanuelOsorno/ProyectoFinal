@@ -327,7 +327,7 @@ public class Aplicacion {
                             cine.getListaClientes().add(cliente_Venta);
                         }
 
-                        boolean ventaRegistrada=cine.registrarVentaEntrada(codigoV,codigoFuncionV,codigoAsientoV,cliente_Venta);
+                        boolean ventaRegistrada=cine.registrarVenta(codigoV,codigoFuncionV,codigoAsientoV,cliente_Venta);
                         if(ventaRegistrada==true){
                             System.out.println("Venta registrada correctamente");
                         }else{
