@@ -369,4 +369,32 @@ public class Cine {
         return null;
     }
 
+    //metodo para encontrar una venta segun su codigo
+    public Venta buscarVenta(String codigo){
+        for(Venta venta:ListaVentas){
+            if(venta.getCódigo().equalsIgnoreCase(codigo)){
+                return venta;
+            }
+        }
+        return null;
+    }
+
+    //metodo para caneclar una venta
+    public boolean cancelarVenta(String codigo){
+        Venta venta=buscarVenta(codigo);
+        //si la venta no existe
+        if(venta==null){
+            System.out.println("No existe esta venda");
+            return false;
+        }
+        //cambiar estado del asiento a DISPONIBLE
+        Asiento asiento=venta.getAsiento();
+        if(asiento!=null){
+            asiento.setEstadoAsiento(EstadoAsiento.DISPONIBLE);
+        }
+        //cambir estado de la venta a CANCELADA
+        venta.setEstadoVenta(EstadoVenta.CANCELADA);
+        return true;
+    }
+
 }
