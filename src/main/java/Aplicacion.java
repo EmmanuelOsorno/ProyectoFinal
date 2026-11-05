@@ -356,6 +356,12 @@ public class Aplicacion {
                     }
                     break;
 
+                case 15:
+                    System.out.println("=====Cantidad de Entradas Vendidas/Activas");
+                    int cantidadVentas=cine.calcularTotalVentas();
+                    System.out.println("Entradas vendidas/activas: "+cantidadVentas);
+                    break;
+
 
 
 
