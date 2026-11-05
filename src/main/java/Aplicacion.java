@@ -2,15 +2,13 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Aplicacion {
+    //menu (provicional)
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        //menu (provicional)
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
-
-            Cine cine=new Cine("CinemaUQ");
-            int opcion;
-
-            do {
+        Cine cine=new Cine("CinemaUQ");
+        int opcion;
+        do {
                 System.out.println("=====CINEMAUQ=====");
                 System.out.println();
 
@@ -27,9 +25,12 @@ public class Aplicacion {
                 System.out.println("9. Desabilitar Sala");
                 System.out.println("-----FUNCION-----");
                 System.out.println("10. Programar Funcion");
-                System.out.println("11. Mostrar funciones");
+                System.out.println("11. Consultar funciones");
+                System.out.println("-----Entradas-----");
+                System.out.println("12. Registar la Venta de una Entrada");
+                System.out.println("13. Consultar Ventas");
+                System.out.println("14. Cantidad total de entradas vendidas");
                 System.out.println("-----x-----");
-                System.out.println(". Ver Películas registradas");
                 System.out.println("0. Salir");
                 System.out.print("Elija una opción: ");
                 opcion=scanner.nextInt();
@@ -269,8 +270,8 @@ public class Aplicacion {
                             case 3:estadoFuncion=EstadoFuncion.CANCELADA;
                         }
 
-                        boolean programada=cine.registrarFuncion(codigoF,codigoPelicula,codigoSala,fechaF,horaF,valorBaseF,estadoFuncion);
-                        if(programada==true){
+                        boolean FuncionRegistrada=cine.registrarFuncion(codigoF,codigoPelicula,codigoSala,fechaF,horaF,valorBaseF,estadoFuncion);
+                        if(FuncionRegistrada==true){
                             System.out.println("Funcion registrada correctamente");
                         }else {
                             System.out.println("No se pudo registrar la función.");
@@ -285,11 +286,89 @@ public class Aplicacion {
                         break;
 
                     case 12:
+                        System.out.println("=====Registrar Venta=====");
+                        //limpiar buffer
+                        scanner.nextLine();
+                        System.out.println("Codigo de la venta: ");
+                        String codigoV=scanner.nextLine();
+                        System.out.println("Codigo de la funcion: ");
+                        String codigoFuncionV=scanner.nextLine();
+                        System.out.println("Codigo del asiento: ");
+                        String codigoAsientoV=scanner.nextLine();
 
+                        //creamos el cliente al registrar la venta
+                        System.out.println("Identificacion del cliente: ");
+                        String identificacionClienteV=scanner.nextLine();
+
+                        //verificar si el cliente existe
+                        Cliente cliente_Venta=cine.buscarCliente(identificacionClienteV);
+
+                        //si el cliente no existe
+                        if(cliente_Venta==null){
+                            System.out.println("Nombre del cliente: ");
+                            String nombreC=scanner.nextLine();
+                            System.out.println("1. General\n2. Estudiante\n3. Niño\n4. Adulto mayor\nSeleccione el tipo: ");
+                            int tipoC=scanner.nextInt();
+                            //la iniciamos como general
+                            TipoCliente tipoCliente=TipoCliente.GENERAL;
+                            switch (tipoC){
+                                case 1:tipoCliente=TipoCliente.GENERAL;
+                                break;
+                                case 2: tipoCliente=TipoCliente.ESTUDIANTE;
+                                break;
+                                case 3: tipoCliente=TipoCliente.NIÑO;
+                                break;
+                                case 4: tipoCliente=TipoCliente.ADULTO_MAYOR;
+                                break;
+                            }
+
+                            //crearlo
+                            cliente_Venta=new Cliente(nombreC,identificacionClienteV,tipoCliente);
+                            cine.getListaClientes().add(cliente_Venta);
+                        }
+
+                        boolean ventaRegistrada=cine.registrarVentaEntrada(codigoV,codigoFuncionV,codigoAsientoV,cliente_Venta);
+                        if(ventaRegistrada==true){
+                            System.out.println("Venta registrada correctamente");
+                        }else{
+                            System.out.println("La venta no se pudo registrar");
+                        }
+                        break;
+
+                    case 13:
+                        System.out.println("=====Ventas=====");
+                        for(Venta ListaVentas:cine.getListaVentas()){
+                            System.out.println(ListaVentas);
+                        }
+                        break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    case 0:
+                        System.out.println("Menu cerrado");
+                        break;
+                    default:
+                        System.out.println("Opcion no valida");
                 }
             }while (opcion!=0);
             scanner.close();
 
         }
-
 }
