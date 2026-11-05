@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Aplicacion {
@@ -24,6 +25,9 @@ public class Aplicacion {
                 System.out.println("7. Mostrar asientos de la sala");
                 System.out.println("8. Actualizar Sala");
                 System.out.println("9. Desabilitar Sala");
+                System.out.println("-----FUNCION-----");
+                System.out.println("10. Programar Funcion");
+                System.out.println("11. Mostrar funciones");
                 System.out.println("-----x-----");
                 System.out.println(". Ver Películas registradas");
                 System.out.println("0. Salir");
@@ -229,6 +233,58 @@ public class Aplicacion {
                         }
                         break;
 
+                    case 10:
+                        System.out.println("=====Registrar Funcion=====");
+                        //limpiar buffer del menu
+                        scanner.nextLine();
+                        System.out.println("Codigo de la Funcion: ");
+                        String codigoF=scanner.nextLine();
+                        System.out.println("Codigo de la pelicula de la Funcion: ");
+                        String codigoPelicula=scanner.nextLine();
+                        System.out.println("Codigo de la sala de la Funcion: ");
+                        String  codigoSala=scanner.nextLine();
+                        System.out.println("Fecha de la Funcion");
+                        System.out.print("Ingrese el año: ");
+                        int año=scanner.nextInt();
+                        System.out.print("Ingrese el mes: ");
+                        int mes=scanner.nextInt();
+                        System.out.print("Ingrese el dia: ");
+                        int dia=scanner.nextInt();
+                        LocalDate fechaF=LocalDate.of(año,mes,dia);
+                        //limpiar buffer
+                        scanner.nextLine();
+                        System.out.println("Hora de la Funcion: ");
+                        String horaF=scanner.nextLine();
+                        System.out.println("Valor base de la Funcion: ");
+                        double valorBaseF=scanner.nextDouble();
+                        System.out.println("1. Programada\n2. Finalizada\n3. Cancelada \nEstado de la Funcion: ");
+                        int estadoF=scanner.nextInt();
+                        //la iniciamos como Programada
+                        EstadoFuncion estadoFuncion=EstadoFuncion.PROGRAMADA;
+                        switch (estadoF){
+                            case 1:estadoFuncion=EstadoFuncion.PROGRAMADA;
+                                break;
+                            case 2:estadoFuncion=EstadoFuncion.FINALIZADA;
+                                break;
+                            case 3:estadoFuncion=EstadoFuncion.CANCELADA;
+                        }
+
+                        boolean programada=cine.registrarFuncion(codigoF,codigoPelicula,codigoSala,fechaF,horaF,valorBaseF,estadoFuncion);
+                        if(programada==true){
+                            System.out.println("Funcion registrada correctamente");
+                        }else {
+                            System.out.println("No se pudo registrar la función.");
+                        }
+                        break;
+
+                    case 11:
+                        System.out.println("=====Funciones=====");
+                        for(Funcion ListaFunciones: cine.getListaFunciones()){
+                            System.out.println(ListaFunciones);
+                        }
+                        break;
+
+                    case 12:
 
                 }
             }while (opcion!=0);
