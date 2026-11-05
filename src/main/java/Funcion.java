@@ -77,4 +77,18 @@ public class Funcion {
     public void setEstadoFuncion(EstadoFuncion estadoFuncion) {
         this.estadoFuncion = estadoFuncion;
     }
+
+    //toString
+
+    @Override
+    public String toString() {
+        return "Funcion "+código+
+                "\nFfecha: " + fecha +
+                "\nHora: " + hora +
+                "\nValor base: " + valorBase +
+                "\nEstado de la funcion: " + estadoFuncion+
+                "\n\nInfo Pelicula: " +pelicula+
+                "\n\nInfo Sala: " + sala;
+
+    }
 }
