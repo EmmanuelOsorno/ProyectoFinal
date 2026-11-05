@@ -25,7 +25,7 @@ public class Aplicacion {
             System.out.println("-----FUNCION-----");
             System.out.println("10. Programar Funcion");
             System.out.println("11. Consultar funciones");
-            System.out.println("-----Entradas-----");
+            System.out.println("-----VENTA-----");
             System.out.println("12. Registar la Venta de una Entrada");
             System.out.println("13. Consultar Ventas");
             System.out.println("14. Cancelar Venta");
