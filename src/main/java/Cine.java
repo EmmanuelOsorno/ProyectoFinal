@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -233,6 +234,47 @@ public class Cine {
         }
         return desabilitada;
     }
+
+    //METODOS FUNCION
+    //programar funcion
+    public boolean registrarFuncion(String codigo, String codigoPelicula, String codigoSala, LocalDate fecha, String hora, double valorBase, EstadoFuncion estadoFuncion){
+       //asiganr pelicula
+        Pelicula pelicula_funcion=null;
+        for(Pelicula peliculaF:ListaPeliculas){
+            if(peliculaF.getCodigo().equalsIgnoreCase(codigoPelicula)){
+                pelicula_funcion=peliculaF;
+                break;
+            }
+        }
+        //asignarr sala
+        Sala sala_funcion=null;
+        for(Sala salaF:ListaSalas){
+            if(salaF.getCódigo().equalsIgnoreCase(codigoSala)){
+                sala_funcion=salaF;
+                break;
+            }
+        }
+        //si la sala y pelicula no existan
+        //"==" porque estamos comparando si son iguales
+        if(pelicula_funcion==null){
+            System.out.println("La pelicula no existe");
+            return false;
+        }else if (sala_funcion==null){
+            System.out.println("La sala no existe");
+            return false;
+        }
+        //impedir registar funcion si el estado de la sala es FUERA_DE_SERVICIO
+        if(sala_funcion.getEstadoSala()==EstadoSala.FUERA_DE_SERVICIO){
+            System.out.println("La sala esta fuera de servicio");
+            return false;
+        }
+        //registar la funcion
+        Funcion nuevaFuncion=new Funcion(codigo,pelicula_funcion,sala_funcion, fecha,hora,valorBase,estadoFuncion);
+        ListaFunciones.add(nuevaFuncion);
+        return true;
+    }
+
+
 
     //REGISTRAR VENTA DE ENTRADA
     //codigoEntrada=codigoVenta
