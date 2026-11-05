@@ -9,33 +9,33 @@ public class Aplicacion {
         Cine cine=new Cine("CinemaUQ");
         int opcion;
         do {
-                System.out.println("=====CINEMAUQ=====");
-                System.out.println();
+            System.out.println("=====CINEMAUQ=====");
+            System.out.println();
+            System.out.println("-----PELICULA-----");
+            System.out.println("1. Registrar Película");
+            System.out.println("2. Consultar Peliculas");
+            System.out.println("3. Actualizar Pelicula");
+            System.out.println("4. Desabilitar Pelicula");
+            System.out.println("-----SALA-----");
+            System.out.println("5. Registrar Sala");
+            System.out.println("6. Consultar Salas");
+            System.out.println("7. Mostrar asientos de la sala");
+            System.out.println("8. Actualizar Sala");
+            System.out.println("9. Desabilitar Sala");
+            System.out.println("-----FUNCION-----");
+            System.out.println("10. Programar Funcion");
+            System.out.println("11. Consultar funciones");
+            System.out.println("-----Entradas-----");
+            System.out.println("12. Registar la Venta de una Entrada");
+            System.out.println("13. Consultar Ventas");
+            System.out.println("14. Cancelar Venta");
+            System.out.println("15. Cantidad total de entradas vendidas");
+            System.out.println("-----x-----");
+            System.out.println("0. Salir");
+            System.out.print("Elija una opción: ");
+            opcion=scanner.nextInt();
 
-                System.out.println("-----PELICULA-----");
-                System.out.println("1. Registrar Película");
-                System.out.println("2. Consultar Peliculas");
-                System.out.println("3. Actualizar Pelicula");
-                System.out.println("4. Desabilitar Pelicula");
-                System.out.println("-----SALA-----");
-                System.out.println("5. Registrar Sala");
-                System.out.println("6. Consultar Salas");
-                System.out.println("7. Mostrar asientos de la sala");
-                System.out.println("8. Actualizar Sala");
-                System.out.println("9. Desabilitar Sala");
-                System.out.println("-----FUNCION-----");
-                System.out.println("10. Programar Funcion");
-                System.out.println("11. Consultar funciones");
-                System.out.println("-----Entradas-----");
-                System.out.println("12. Registar la Venta de una Entrada");
-                System.out.println("13. Consultar Ventas");
-                System.out.println("14. Cantidad total de entradas vendidas");
-                System.out.println("-----x-----");
-                System.out.println("0. Salir");
-                System.out.print("Elija una opción: ");
-                opcion=scanner.nextInt();
-
-                switch (opcion){
+            switch (opcion){
                     case 1:
                         System.out.println("=====Registrar Pelicula=====");
                         //limpiar buffer del menu
@@ -341,27 +341,25 @@ public class Aplicacion {
                             System.out.println(ListaVentas);
                         }
                         break;
+                case 14:
+                    System.out.println("=====Cancelar Venta=====");
+                    //limpiar buffer
+                    scanner.nextLine();
+                    System.out.println("Codigo de la venta a cancelar: ");
+                    String codigoCancelarV=scanner.nextLine();
+
+                    boolean cancelada=cine.cancelarVenta(codigoCancelarV);
+                    if(cancelada==true){
+                        System.out.println("Venta cancelada correctamente");
+                    }else{
+                        System.out.println("No se encontro la venta a cancelar");
+                    }
+                    break;
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    case 0:
+                case 0:
                         System.out.println("Menu cerrado");
                         break;
                     default:
