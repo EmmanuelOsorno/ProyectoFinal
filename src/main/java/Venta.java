@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 
 public class Venta {
     //atributos
-    private String código;
+    private String codigo;
     private Cliente cliente;
     private Funcion funcion;
     private Asiento asiento;
@@ -14,25 +14,28 @@ public class Venta {
     private TipoCliente tipoCliente;
 
     //constructor
-    public Venta(String código, Cliente cliente, Funcion funcion, Asiento asiento, LocalDateTime fechaHora, double valorPagado, EstadoVenta estadoVenta, TipoCliente tipoCliente) {
-        this.código = código;
+    public Venta(String codigo, Cliente cliente, Funcion funcion, Asiento asiento, LocalDateTime fechaHora,double valorPagado, EstadoVenta estadoVenta, TipoCliente tipoCliente) {
+        this.codigo = codigo;
         this.cliente = cliente;
         this.funcion = funcion;
         this.asiento = asiento;
-        //LocalDateTime.now agregara la fcha y hora al momento de registrar l aventa
+        //LocalDateTime.now agregara la fcha y hora al momento de registrar la venta
         this.fechaHora = LocalDateTime.now();
         this.valorPagado = valorPagado;
         this.estadoVenta = estadoVenta;
-        this.tipoCliente=tipoCliente;
+        this.tipoCliente = tipoCliente;
     }
+
 
     //get y set
-    public String getCódigo() {
-        return código;
+
+
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCódigo(String código) {
-        this.código = código;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public Cliente getCliente() {
@@ -91,19 +94,26 @@ public class Venta {
         this.tipoCliente = tipoCliente;
     }
 
+
     //get y set
 
     @Override
     public String toString() {
-        return "Venta{" +
-                "código='" + código + '\'' +
-                ", cliente=" + cliente +
-                ", funcion=" + funcion +
-                ", asiento=" + asiento +
-                ", fechaHora=" + fechaHora +
-                ", valorPagado=" + valorPagado +
-                ", estadoVenta=" + estadoVenta +
-                ", tipoCliente=" + tipoCliente +
-                '}';
+        return "Venta: " +
+                "Código="  + codigo +
+                "\nCliente=" + cliente +
+                "\nFuncion=" + funcion +
+                "\nAsiento="  + asiento +
+                "\nFechaHora=" + fechaHora +
+                "\nValorPagado= " + valorPagado +
+                "\nEstadoVenta= " + estadoVenta +
+                "\n TipoCliente= " + tipoCliente ;
     }
+
+    //calcular valor pagado
+    public double calcularValorPagado() {
+        return funcion.getValorBase() + tipoCliente.getValor();
+    }
+
+
 }
