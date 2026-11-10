@@ -319,14 +319,7 @@ public class Aplicacion {
                         double valorBase = scanner.nextDouble();
 
                         try {
-                            cine.programarFuncion(
-                                    codigoFuncion,
-                                    codigoPelicula,
-                                    codigoSala,
-                                    fecha,
-                                    hora,
-                                    valorBase
-                            );
+                            cine.programarFuncion(codigoFuncion, codigoPelicula, codigoSala, fecha, hora, valorBase);
 
                             System.out.println("Función programada correctamente");
 
@@ -406,7 +399,7 @@ public class Aplicacion {
                     case 18:
                         scanner.nextLine();
 
-                        System.out.println("Ingrese el código de la venta que desea cancelar:");
+                        System.out.println("Debe ingresar el código de la venta que desea cancelar:");
                         String codigoVenta = scanner.nextLine();
 
                         try {
@@ -418,14 +411,32 @@ public class Aplicacion {
 
                         break;
 
+                    case 19:
+                        int totalEntradas = cine.calcularTotalEntradasVendidas();
 
+                        System.out.println("Total de entradas vendidas: " + totalEntradas);
+                        break;
 
+                    case 20:
+                        double totalIngresos = cine.calcularTotalIngresos();
 
+                        System.out.println("Total de ingresos del cine: $" + totalIngresos);
+                        break;
+
+                    case 21:
+                        Pelicula peliculaMayor = cine.obtenerPeliculaMayorEntradas();
+
+                        if (peliculaMayor == null) {
+                            System.out.println(" ¡No hay ventas registradas! ");
+                        } else {
+                            System.out.println("Película con mayor número de entradas vendidas: ");
+                            System.out.println(peliculaMayor);
+                        }
+                        break;
 
                 }
             }while (opcion!=0);
             scanner.close();
-
         }
 
 }
