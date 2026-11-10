@@ -19,6 +19,22 @@ public class Funcion {
         this.hora = hora;
         this.valorBase = valorBase;
         this.estadoFuncion = estadoFuncion;
+
+
+        //que no sea nula la sala
+        if (sala == null) {
+            throw new IllegalArgumentException("La sala no puede ser nula");
+        }
+        // Validar que la sala esté disponible
+        if (estadoFuncion == EstadoFuncion.PROGRAMADA &&
+                sala.getEstadoSala() == EstadoSala.FUERA_DE_SERVICIO) {
+
+            throw new IllegalArgumentException(
+                    "No se puede programar una función en una sala fuera de servicio"
+            );
+        }
+
+
     }
 
     //get y set
@@ -76,5 +92,17 @@ public class Funcion {
 
     public void setEstadoFuncion(EstadoFuncion estadoFuncion) {
         this.estadoFuncion = estadoFuncion;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcion: " +
+                "\nCódigo= " + código +
+                "\nPelicula= " + pelicula +
+                "\nSala= " + sala +
+                "\nFecha= " + fecha +
+                "\nHora= " + hora +
+                "\nValorBase= " + valorBase +
+                "\nEstadoFuncion= " + estadoFuncion;
     }
 }

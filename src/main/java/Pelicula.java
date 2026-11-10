@@ -77,4 +77,5 @@ public class Pelicula {
                 "\nClasificacion: " + clasificacion +
                 "\nEstado: " + estadoPelicula+"\n";
     }
+
 }
