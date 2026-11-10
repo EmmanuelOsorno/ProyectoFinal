@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Aplicacion {
@@ -13,7 +14,7 @@ public class Aplicacion {
                 System.out.println("=====CINEMAUQ=====");
                 System.out.println();
 
-                System.out.println("-----PELICULA-----");
+                System.out.println("---------PELICULA------");
                 System.out.println("1. Registrar Película");
                 System.out.println("2. Consultar Peliculas");
                 System.out.println("3. Actualizar Pelicula");
@@ -24,8 +25,22 @@ public class Aplicacion {
                 System.out.println("7. Mostrar asientos de la sala");
                 System.out.println("8. Actualizar Sala");
                 System.out.println("9. Desabilitar Sala");
-                System.out.println("-----x-----");
-                System.out.println(". Ver Películas registradas");
+                System.out.println("------Clientes-------");
+                System.out.println("10. Registrar cliente");
+                System.out.println("11. Consultar cliente");
+                System.out.println("-------Función-----");
+                System.out.println("12. Programar función");
+                System.out.println("13. Consultar función");
+                System.out.println("14. Consultar función por fecha");
+                System.out.println("15. Consultar asientos ocupados por funcion");
+                System.out.println("----------venta---------");
+                System.out.println("16. Registrar venta de una entrada");
+                System.out.println("17. Consultar venta");
+                System.out.println("18. Cancelar venta");
+                System.out.println("--------------Reportes------------");
+                System.out.println("19. Total de ventas de entradas");
+                System.out.println("20. Total de  ingresos");
+                System.out.println("21. Pelicula con mayor entradas");
                 System.out.println("0. Salir");
                 System.out.print("Elija una opción: ");
                 opcion=scanner.nextInt();
@@ -228,6 +243,183 @@ public class Aplicacion {
                             System.out.println("Sala no enontrada");
                         }
                         break;
+
+
+                    case 10:
+
+                        scanner.nextLine();
+
+                        System.out.println(" Ingrese el nombre del cliente: ");
+                        String nombreCliente = scanner.nextLine();
+
+                        System.out.println("Ingrese el documento del cliente:");
+                        String identificacion = scanner.nextLine();
+
+                        System.out.println("Seleccione el tipo de cliente: ");
+                        System.out.println("1. GENERAL");
+                        System.out.println("2. ESTUDIANTE");
+                        System.out.println("3. NIÑO");
+                        System.out.println("4. ADULTO MAYOR");
+
+                        int tipoC = scanner.nextInt();
+                        TipoCliente tipoCliente = null;
+
+                        switch (tipoC) {
+                            case 1:
+                                tipoCliente = TipoCliente.GENERAL;
+                                break;
+                            case 2:
+                                tipoCliente = TipoCliente.ESTUDIANTE;
+                                break;
+                            case 3:
+                                tipoCliente = TipoCliente.NIÑO;
+                                break;
+                            case 4:
+                                tipoCliente = TipoCliente.ADULTO_MAYOR;
+                                break;
+                            default:
+                                System.out.println("El Tipo de cliente no  es válido");
+                        }
+                        //Se usa try y catch para poder incluir las excepciones en la clase cine.
+
+                        if (tipoCliente != null) {
+                            try {
+                                cine.registrarCliente(nombreCliente, identificacion, tipoCliente);
+                                System.out.println("Cliente  fue registrado correctamente");
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        break;
+
+
+                    case 11:
+                        cine.consultarClientes();
+                        break;
+
+                    case 12:
+                        scanner.nextLine();
+
+                        System.out.println("Ingrese el código de la función:");
+                        String codigoFuncion = scanner.nextLine();
+
+                        System.out.println("Ingrese el código de la película:");
+                        String codigoPelicula = scanner.nextLine();
+
+                        System.out.println("Ingrese el código de la sala:");
+                        String codigoSala = scanner.nextLine();
+
+                        System.out.println("Ingrese la fecha (AAAA-MM-DD):");
+                        LocalDate fecha = LocalDate.parse(scanner.nextLine());
+
+                        System.out.println("Ingrese la hora (HH:MM):");
+                        String hora = scanner.nextLine();
+
+                        System.out.println("Ingrese el valor base de la función:");
+                        double valorBase = scanner.nextDouble();
+
+                        try {
+                            cine.programarFuncion(
+                                    codigoFuncion,
+                                    codigoPelicula,
+                                    codigoSala,
+                                    fecha,
+                                    hora,
+                                    valorBase
+                            );
+
+                            System.out.println("Función programada correctamente");
+
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+
+                    case 13:
+                        cine.consultarFunciones();
+                        break;
+
+                    case 14:
+                        scanner.nextLine();
+
+                        System.out.println("Ingrese la fecha (AAAA-MM-DD):");
+                        LocalDate fechaConsulta = LocalDate.parse(scanner.nextLine());
+
+                        cine.consultarFuncionesPorFecha(fechaConsulta);
+
+                        break;
+
+                    case 15:
+                        scanner.nextLine();
+
+                        System.out.println("Ingrese el código de la función:");
+                        String codigoConsulta = scanner.nextLine();
+
+                        try {
+                            cine.consultarOcupacionFuncion(codigoConsulta);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+
+                        break;
+
+                    case 16:
+                        scanner.nextLine();
+
+                        System.out.println("Ingrese el código de la entrada:");
+                        String codigoEntrada = scanner.nextLine();
+
+                        System.out.println("Ingrese el código de la función:");
+                        String codigoFuncionVenta = scanner.nextLine();
+
+                        System.out.println("Ingrese el código del asiento:");
+                        String codigoAsiento = scanner.nextLine();
+
+                        System.out.println("Ingrese la identificación del cliente:");
+                        String identificacionCliente = scanner.nextLine();
+
+                        Cliente clienteEncontrado = null;
+
+                        for (Cliente cliente : cine.getListaClientes()) {
+                            if (cliente.getIdentificacion().equalsIgnoreCase(identificacionCliente)) {
+                                clienteEncontrado = cliente;
+                                break;
+                            }
+                        }
+
+                        if (clienteEncontrado == null) {
+                            System.out.println("No existe un cliente con esa identificación");
+                        } else {
+                            try {
+                                cine.registrarVentaEntrada(codigoEntrada, codigoFuncionVenta, codigoAsiento, clienteEncontrado
+                                );
+                            } catch (IllegalArgumentException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+
+                        break;
+
+                    case 17:
+                        cine.consultarVentas();
+                        break;
+                    case 18:
+                        scanner.nextLine();
+
+                        System.out.println("Ingrese el código de la venta que desea cancelar:");
+                        String codigoVenta = scanner.nextLine();
+
+                        try {
+                            cine.cancelarVenta(codigoVenta);
+                            System.out.println("Venta cancelada correctamente");
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                        }
+
+                        break;
+
+
+
 
 
                 }
