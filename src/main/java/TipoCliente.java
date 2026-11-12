@@ -1,5 +1,4 @@
 public enum TipoCliente {
-
     GENERAL(30000),
     ESTUDIANTE(25000),
     NIÑO(15000),
