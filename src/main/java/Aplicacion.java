@@ -11,33 +11,33 @@ public class Aplicacion {
             int opcion;
 
             do {
-                System.out.println("=====CINEMAUQ=====");
+                System.out.println("==============CINEMAUQ===============");
                 System.out.println();
 
-                System.out.println("---------PELICULA------");
+                System.out.println("    ---------PELICULA------   ");
                 System.out.println("1. Registrar Película");
                 System.out.println("2. Consultar Peliculas");
                 System.out.println("3. Actualizar Pelicula");
                 System.out.println("4. Desabilitar Pelicula");
-                System.out.println("-----SALA-----");
+                System.out.println("   -----------SALA--------  ");
                 System.out.println("5. Registrar Sala");
                 System.out.println("6. Consultar Salas");
                 System.out.println("7. Mostrar asientos de la sala");
                 System.out.println("8. Actualizar Sala");
                 System.out.println("9. Desabilitar Sala");
-                System.out.println("------Clientes-------");
+                System.out.println("  ---------Clientes---------");
                 System.out.println("10. Registrar cliente");
                 System.out.println("11. Consultar cliente");
-                System.out.println("-------Función-----");
+                System.out.println("  ---------Función----- ");
                 System.out.println("12. Programar función");
                 System.out.println("13. Consultar función");
                 System.out.println("14. Consultar función por fecha");
                 System.out.println("15. Consultar asientos ocupados por funcion");
-                System.out.println("----------venta---------");
+                System.out.println("  ----------venta--------- ");
                 System.out.println("16. Registrar venta de una entrada");
                 System.out.println("17. Consultar venta");
                 System.out.println("18. Cancelar venta");
-                System.out.println("--------------Reportes------------");
+                System.out.println("------------Reportes----------");
                 System.out.println("19. Total de ventas de entradas");
                 System.out.println("20. Total de  ingresos");
                 System.out.println("21. Pelicula con mayor entradas");

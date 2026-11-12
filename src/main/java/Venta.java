@@ -19,7 +19,7 @@ public class Venta {
         this.cliente = cliente;
         this.funcion = funcion;
         this.asiento = asiento;
-        //LocalDateTime.now agregara la fcha y hora al momento de registrar la venta
+        //LocalDateTime.now agregara la fecha y hora al momento de registrar la venta
         this.fechaHora = LocalDateTime.now();
         this.valorPagado = valorPagado;
         this.estadoVenta = estadoVenta;
@@ -100,11 +100,11 @@ public class Venta {
     @Override
     public String toString() {
         return "Venta: " +
-                "Código="  + codigo +
-                "\nCliente=" + cliente +
-                "\nFuncion=" + funcion +
-                "\nAsiento="  + asiento +
-                "\nFechaHora=" + fechaHora +
+                "Código= "  + codigo +
+                "\nCliente= " + cliente +
+                "\nFuncion= " + funcion +
+                "\nAsiento= "  + asiento +
+                "\nFechaHora= " + fechaHora +
                 "\nValorPagado= " + valorPagado +
                 "\nEstadoVenta= " + estadoVenta +
                 "\n TipoCliente= " + tipoCliente ;

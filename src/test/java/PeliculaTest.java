@@ -8,7 +8,6 @@ class PeliculaTest {
 
     //PARA QUE SE CREE CORRECTAMENTE
 
-
     @Test
     void DebeCrearCorrectamente() {
         assertNotNull(pelicula);
