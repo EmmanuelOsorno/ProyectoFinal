@@ -434,6 +434,12 @@ public class Aplicacion {
                         }
                         break;
 
+                        case 0:
+                                System.out.println("Menu cerrado");
+                                break;
+                        default:
+                                System.out.println("Opcion no valida");
+
                 }
             }while (opcion!=0);
             scanner.close();
